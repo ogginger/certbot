@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [ ! -d "$(pwd)/etc/letsencrypt/letsencrypt" ]
+then
+    echo "$(pwd)/etc/letsencrypt/letsencrypt does not exist."
+elif [ ! -d "$(pwd)/etc/letsencrypt/etc/letsencrypt" ]
+then
+    echo "$(pwd)/etc/letsencrypt/etc/letsencrypt does not exist."
+else
+    docker run -it --rm --name certbot \
+    -v $(pwd)/etc/letsencrypt/letsencrypt:/letsencrypt \
+    -v $(pwd)/etc/letsencrypt/etc/letsencrypt:/etc/letsencrypt \
+    certbot
+fi
